@@ -6,10 +6,25 @@
 
 #board {
   display: grid;
-  grid-template-columns: repeat(8, 2fr);
   grid-template-rows: repeat(8, 2fr);
 }
+#board > div:nth-child(even) > div:nth-child(even) {
+  background-color: white;
+}
+#board > div:nth-child(even) > div:nth-child(odd) {
+  background-color: lightgray;
+}
+#board > div:nth-child(odd) > div:nth-child(odd) {
+  background-color: white;
+}
+#board > div:nth-child(odd) > div:nth-child(even) {
+  background-color: lightgray;
+}
 #board > div {
+  display: grid;
+  grid-template-columns: repeat(8, 2fr);
+}
+#board > div > div {
   height: 80px;
 }
 

@@ -12,13 +12,29 @@ body {
 
 #board {
     display: grid;
-    grid-template-columns: repeat(8, 2fr);
     grid-template-rows: repeat(8, 2fr);
-    // height: 550px;
-    // width: 550px;
-
+    > div:nth-child(even) {
+        > div:nth-child(even) {
+            background-color: white;
+        }
+        > div:nth-child(odd) {
+            background-color: lightgray;
+        }
+    }
+    > div:nth-child(odd) {
+        > div:nth-child(odd) {
+            background-color: white;
+        }
+        > div:nth-child(even) {
+            background-color: lightgray;
+        }
+    }
     > div {
-        height: 80px;
-        // width: 80px;
+        display: grid;
+        grid-template-columns: repeat(8, 2fr);
+
+        > div {
+            height: 80px;
+        }
     }
 }
