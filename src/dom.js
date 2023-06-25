@@ -9,11 +9,17 @@ export default class BoardDom {
         const boardArr = board.createBoard();
 
         boardArr.forEach((element, index) => {
-            document.querySelector('#board').appendChild(
-                Object.assign(document.createElement('div'), {
-                    textContent: index,
-                })
-            );
+            const createRow = document.createElement('div');
+            createRow.className = `row-${index}`;
+
+            element.forEach((subElement, idx) => {
+                const createColumn = document.createElement('div');
+                createColumn.textContent = idx;
+
+                createRow.appendChild(createColumn);
+            });
+
+            document.querySelector('#board').appendChild(createRow);
         });
     }
 }
