@@ -8,14 +8,33 @@ $primary-color: #333;
 }
 
 body {
+    padding: 2% 10%;
+    position: relative;
+    overflow: auto;
+}
+
+ul {
+    position: absolute;
+    color: green;
+    left: 8%;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    list-style: none;
+    font-weight: bold;
 }
 
 #board {
     display: grid;
     grid-template-rows: repeat(8, 2fr);
+    gap: 10px;
+    border: solid 1px red;
+    color: goldenrod;
+    padding: 5px;
+    font-weight: bolder;
     > div:nth-child(even) {
         > div:nth-child(even) {
-            background-color: white;
+            background-color: azure;
         }
         > div:nth-child(odd) {
             background-color: lightgray;
@@ -23,7 +42,7 @@ body {
     }
     > div:nth-child(odd) {
         > div:nth-child(odd) {
-            background-color: white;
+            background-color: azure;
         }
         > div:nth-child(even) {
             background-color: lightgray;
@@ -32,6 +51,7 @@ body {
     > div {
         display: grid;
         grid-template-columns: repeat(8, 2fr);
+        gap: 10px;
 
         > div {
             height: 80px;
