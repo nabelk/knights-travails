@@ -1,8 +1,9 @@
-import Board from './board';
+import Algorithm from './algo';
 
 const { log, table } = console;
 
-const board = Board();
+const algo = Algorithm();
+const board = algo.board;
 board.knightPosition([3, 3]);
 
 export default class BoardDom {
@@ -15,25 +16,26 @@ export default class BoardDom {
     displayBoard() {
         this.removeBoard();
         const boardArr = board.createBoard;
-
-        boardArr.forEach((element, index) => {
+        for (let rowIdx = boardArr.length - 1; rowIdx >= 0; rowIdx--) {
             const createRow = document.createElement('div');
-            createRow.className = `row-${index}`;
+            createRow.className = `row-${rowIdx}`;
 
-            element.forEach((subElement, idx) => {
+            boardArr[rowIdx].forEach((subElement, idx) => {
                 const createColumn = document.createElement('div');
+                if (subElement === 'K')
+                    createColumn.style.backgroundColor = 'green';
                 createColumn.textContent = idx + subElement;
-                createColumn.dataset.coor = [index, idx];
+                createColumn.dataset.coor = [rowIdx, idx];
                 createRow.appendChild(createColumn);
             });
 
             document.querySelector('#board').appendChild(createRow);
-        });
+        }
         this.boardColumnEvent();
     }
 
     boardColumnEvent() {
-        document.querySelectorAll('#board > div').forEach((div) =>
+        document.querySelectorAll('#board > div > div').forEach((div) =>
             div.addEventListener('click', (event) => {
                 board.knightPosition(
                     event.target.dataset.coor.split(',').map(Number)
@@ -41,5 +43,17 @@ export default class BoardDom {
                 this.displayBoard();
             })
         );
+    }
+
+    travailMoveDom() {
+        const findPath = algo.knightTravail([3, 3], [0, 5]);
+
+        findPath.forEach((path, index) => {
+            setTimeout(() => {
+                board.knightPosition(path);
+
+                this.displayBoard();
+            }, index * 500);
+        });
     }
 }
