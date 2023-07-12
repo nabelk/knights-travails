@@ -4,9 +4,16 @@ const { log, table } = console;
 
 const algo = Algorithm();
 const board = algo.board;
-board.knightPosition([3, 3]);
 
 export default class BoardDom {
+    getRandomArr() {
+        const [row, column] = [
+            Math.floor(Math.random() * 8),
+            Math.floor(Math.random() * 8),
+        ];
+        return [row, column];
+    }
+
     removeBoard() {
         document
             .querySelectorAll('#board > div')
@@ -22,38 +29,50 @@ export default class BoardDom {
 
             boardArr[rowIdx].forEach((subElement, idx) => {
                 const createColumn = document.createElement('div');
-                if (subElement === 'K')
-                    createColumn.style.backgroundColor = 'green';
-                createColumn.textContent = idx + subElement;
-                createColumn.dataset.coor = [rowIdx, idx];
+                if (subElement === 'K') {
+                    createColumn.innerHTML = '&#9822;';
+                    createColumn.classList.add('column-knight');
+                }
+                if (subElement === 'E')
+                    createColumn.style.backgroundColor = '#fb5454';
                 createRow.appendChild(createColumn);
             });
 
             document.querySelector('#board').appendChild(createRow);
         }
-        this.boardColumnEvent();
     }
 
-    boardColumnEvent() {
-        document.querySelectorAll('#board > div > div').forEach((div) =>
-            div.addEventListener('click', (event) => {
-                board.knightPosition(
-                    event.target.dataset.coor.split(',').map(Number)
-                );
-                this.displayBoard();
-            })
-        );
+    placeRandomKnight() {
+        board.knightPosition(this.getRandomArr());
+        this.displayBoard();
+    }
+
+    placeRandomKnightDestination() {
+        const randomArr = this.getRandomArr();
+        if (randomArr === board.getCurKnightPos())
+            return this.placeRandomKnightDestination();
+        board.knightPosToGo(randomArr);
+        this.displayBoard();
     }
 
     travailMoveDom() {
-        const findPath = algo.knightTravail([3, 3], [0, 5]);
+        const findPath = algo.knightTravail(
+            board.getCurKnightPos(),
+            board.getEndKnightPos()
+        );
+
+        log(`You made it in ${findPath.length - 1} moves!  Here's your path:`);
 
         findPath.forEach((path, index) => {
+            log(path);
             setTimeout(() => {
                 board.knightPosition(path);
-
                 this.displayBoard();
             }, index * 500);
         });
+
+        setTimeout(() => {
+            location.reload();
+        }, 5000);
     }
 }
