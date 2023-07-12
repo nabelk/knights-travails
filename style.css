@@ -1,3 +1,8 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+:root {
+  font-size: 16px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -5,9 +10,32 @@
 }
 
 body {
+  background-color: #333;
+  height: 100vh;
   padding: 2% 10%;
   position: relative;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 30px;
+}
+@media only screen and (max-width: 890px) {
+  body {
+    padding: 2% 0;
+  }
+}
+
+.btn-mode {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.btn-mode button {
+  font-size: 1rem;
+  padding: 5px 8px;
 }
 
 ul {
@@ -24,31 +52,93 @@ ul {
 #board {
   display: grid;
   grid-template-rows: repeat(8, 2fr);
-  gap: 10px;
-  border: solid 1px red;
-  color: goldenrod;
+  gap: 8px;
+  border: solid 2px black;
   padding: 5px;
   font-weight: bolder;
+  width: 890px;
+  height: 890px;
 }
 #board > div:nth-child(even) > div:nth-child(even) {
-  background-color: azure;
+  background-color: #eeeed2;
 }
 #board > div:nth-child(even) > div:nth-child(odd) {
-  background-color: lightgray;
+  background-color: #769656;
 }
 #board > div:nth-child(odd) > div:nth-child(odd) {
-  background-color: azure;
+  background-color: #eeeed2;
 }
 #board > div:nth-child(odd) > div:nth-child(even) {
-  background-color: lightgray;
+  background-color: #769656;
 }
 #board > div {
   display: grid;
   grid-template-columns: repeat(8, 2fr);
-  gap: 10px;
+  gap: 8px;
 }
-#board > div > div {
-  height: 80px;
+@media only screen and (max-width: 890px) {
+  #board {
+    width: 95%;
+    height: 60%;
+  }
+}
+
+div.column-knight {
+  font-size: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media only screen and (max-width: 891px) {
+  div.column-knight {
+    font-size: 40px;
+  }
+}
+@media only screen and (max-width: 401px) {
+  div.column-knight {
+    font-size: 30px;
+  }
+}
+@media only screen and (max-width: 304px) {
+  div.column-knight {
+    font-size: 25px;
+  }
+}
+
+.fuller-button {
+  color: rgb(255, 255, 255);
+  background: none;
+  border-radius: 0;
+  padding: 1.2em 5em;
+  letter-spacing: 0.35em;
+  font-size: 0.7em;
+  transition: background-color 0.3s, box-shadow 0.3s, color 0.3s;
+  margin: 1em;
+}
+.fuller-button.blue {
+  box-shadow: inset 0 0 1em rgba(0, 170, 170, 0.5), 0 0 1em rgba(0, 170, 170, 0.5);
+  border: #0dd solid 2px;
+}
+.fuller-button.blue:hover {
+  background-color: #0dd;
+  box-shadow: inset 0 0 0 rgba(0, 170, 170, 0.5), 0 0 1.5em rgba(0, 170, 170, 0.7);
+}
+.fuller-button.red {
+  box-shadow: inset 0 0 1em rgba(251, 81, 81, 0.4), 0 0 1em rgba(251, 81, 81, 0.4);
+  border: #fb5454 solid 2px;
+}
+.fuller-button.red:hover {
+  background-color: #fb5454;
+  box-shadow: inset 0 0 0 rgba(251, 81, 81, 0.4), 0 0 1.5em rgba(251, 81, 81, 0.6);
+}
+.fuller-button.white {
+  box-shadow: inset 0 0 0.8em rgba(255, 255, 255, 0.3), 0 0 0.8em rgba(255, 255, 255, 0.3);
+  border: #fff solid 2px;
+}
+.fuller-button.white:hover {
+  color: rgba(0, 0, 0, 0.8);
+  background-color: #fff;
+  box-shadow: inset 0 0 0 rgba(255, 255, 255, 0.3), 0 0 1.2em rgba(255, 255, 255, 0.5);
 }
 
 /*# sourceMappingURL=style.css.map */
